@@ -1,0 +1,43 @@
+{
+    "$schema": "../node_modules/@openapitools/openapi-generator-cli/config.schema.json",
+    "spaces": 2,
+    "generator-cli": {
+        "version": "5.1.0",
+        "generators": {
+            "v3.0": {
+                "generatorName": "typescript-angular",
+                "output": "../generated",
+                "glob": "openapi.yaml",
+                "globalProperty": {
+                    "skipFormModel": false
+                },
+                "typeMappings": {
+                    "set": "Array"
+                },
+                "additionalProperties": {
+                    "skipFormModel": false,
+                    "ngVersion": "13.2.0",
+                    "supportsES6": true,
+                    "npmVersion": "6.14.8",
+                    "withInterfaces": true,
+                    "serviceSuffix": "DataService",
+                    "serviceFileSuffix": "-data.service",
+                    "sortParamsByRequiredFlag": true,
+                    "ensureUniqueParams": true,
+                    "allowUnicodeIdentifiers": false,
+                    "modelPackage": "model",
+                    "apiPackage": "api",
+                    "variableNamingConvention": "camelCase",
+                    "fileNaming": "kebab-case",
+                    "hideGenerationTimestamp": true,
+                    "legacyDiscriminatorBehavior": true,
+                    "disallowAdditionalPropertiesIfNotPresent": false,
+                    "queryParamObjectFormat": "key",
+                    "stringEnums": true,
+                    "useSingleRequestParameter": true,
+                    "enablePostProcessFile": true
+                }
+            }
+        }
+    }
+  }

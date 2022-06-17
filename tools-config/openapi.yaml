@@ -1,0 +1,122 @@
+openapi: '3.0.3'
+info:
+  description: 'My Service Client'
+  version: '1.0.0'
+  title: 'My Service mobile API client'
+  contact:
+    email: 'development@mycompany.com'
+  license:
+    name: 'LGPL 3.0'
+    url: 'https://www.gnu.org/licenses/lgpl-3.0.html'
+tags:
+  - name: 'login'
+    description: 'Operation for Login'
+  - name: 'user'
+    description: 'Operations about user'
+paths:
+  /login:
+    post:
+      tags:
+        - 'login'
+      summary: 'Login'
+      description: 'A special login end-point that provides a way for the user to login with a username/email and one of password/PIN and get back the Basic Authentication details (Username and Access Token) to use for sub-sequent requests using Basic Authentication.'
+      operationId: 'login'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LoginCredentials'
+      responses:
+        '200':
+          description: 'Login successful'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LoginResponse'
+        '401':
+          description: 'Unauthorized'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /my/user:
+    get:
+      tags:
+        - 'user'
+      summary: 'This endpoint is used to retrieve the details for a member'
+      operationId: 'getMemberDetails'
+      responses:
+        '200':
+          description: 'successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MemberDetailsResponse'
+        '401':
+          description: 'Unauthorized'
+          content:
+            text/html:
+              schema:
+                type: 'string'
+      security:
+        - BasicAuth: []
+components:
+  securitySchemes:
+    BasicAuth:
+      type: http
+      scheme: basic
+  schemas:
+    LoginCredentials:
+      type: 'object'
+      properties:
+        username:
+          type: 'string'
+        password:
+          type: 'string'
+          format: 'password'
+    LoginResponse:
+      type: 'object'
+      properties:
+        username:
+          type: 'string'
+        access_token:
+          type: 'string'
+    ErrorResponse:
+      type: 'object'
+      properties:
+        message:
+          type: 'string'
+        error_code:
+          type: 'string'
+        error_code_description:
+          type: 'string'
+        correlation_id:
+          type: 'string'
+    MemberDetailsResponse:
+      type: 'object'
+      properties:
+        id:
+          type: 'string'
+        externalId:
+          type: 'number'
+        first_name:
+          type: 'string'
+        last_name:
+          type: 'string'
+        email:
+          type: 'string'
+          format: 'email'
+        home_center:
+          $ref: '#/components/schemas/Center'
+        preferred_center_ids:
+          type: 'array'
+          items:
+            type: 'number'
+        is_staff:
+          type: 'boolean'
+    Center:
+      type: 'object'
+      properties:
+        id:
+          type: 'number'
