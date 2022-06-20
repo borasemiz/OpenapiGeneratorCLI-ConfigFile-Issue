@@ -1,5 +1,11 @@
 # Readme
 
+First, you need to install the node dependencies with the following command in the project's root directory:
+
+```
+$ npm install
+```
+
 The `master` branch contains the state which doesn't work. The spec and generator config file is located inside `tools-config` directory. In the root of this project, in command line, execute:
 
 ```
